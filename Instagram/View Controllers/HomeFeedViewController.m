@@ -7,9 +7,14 @@
 //
 
 #import "HomeFeedViewController.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "PhotoCell.h"
 
-@interface HomeFeedViewController ()
+@interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *posts;
 
 @end
 
@@ -17,7 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     // Do any additional setup after loading the view.
+    
+    self.posts = [[NSMutableArray alloc] init];
+    [self fetchPosts];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,13 +35,48 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)didTapLogout:(id)sender {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            // do something upon completion
-        }];
+- (void) fetchPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    query.limit = 20;
+    
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            [self.posts removeAllObjects];
+            for (Post *post in posts) {
+                [self.posts addObject:post];
+            }
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
     }];
 }
+
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        appDelegate.window.rootViewController = loginViewController;
+    }];
+}
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PhotoCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell" forIndexPath:indexPath];
+    cell.post = self.posts[indexPath.row];
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation
