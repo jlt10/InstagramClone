@@ -105,7 +105,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="492.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IwO-P9-IHV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IwO-P9-IHV" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IwO-P9-IHV" secondAttribute="height" multiplier="1:1" id="Qwj-Yz-DEC"/>
@@ -167,7 +167,7 @@
                                             <outlet property="commentButton" destination="uLa-s9-eXJ" id="QE0-Qa-G3b"/>
                                             <outlet property="likeButton" destination="7hF-nU-EJN" id="gR1-VY-E2T"/>
                                             <outlet property="likesLabel" destination="Xhf-tY-GQ3" id="WLx-b3-zxC"/>
-                                            <outlet property="postPhoto" destination="IwO-P9-IHV" id="ip5-3Q-aXe"/>
+                                            <outlet property="postImage" destination="IwO-P9-IHV" id="ayy-zS-Jdg"/>
                                             <outlet property="sendButton" destination="9Sc-AJ-Ia7" id="myU-vX-1HN"/>
                                             <outlet property="usernameLabel" destination="zid-Xm-IT1" id="mna-ba-2qj"/>
                                         </connections>

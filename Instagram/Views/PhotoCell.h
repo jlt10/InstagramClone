@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import <ParseUI/ParseUI.h>
 
 @interface PhotoCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *postPhoto;
+@property (weak, nonatomic) IBOutlet PFImageView *postImage;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;

@@ -15,6 +15,7 @@
 @interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +28,11 @@
     // Do any additional setup after loading the view.
     
     self.posts = [[NSMutableArray alloc] init];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
     [self fetchPosts];
 }
 
@@ -48,6 +54,7 @@
             for (Post *post in posts) {
                 [self.posts addObject:post];
             }
+            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
         else {
@@ -76,7 +83,6 @@
     cell.post = self.posts[indexPath.row];
     return cell;
 }
-
 
 /*
 #pragma mark - Navigation
