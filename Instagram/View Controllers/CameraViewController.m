@@ -30,15 +30,19 @@
 }
 
 - (IBAction)didTapCancel:(id)sender {
-    [self clearImage];
+    [self clear];
 }
 
 - (IBAction)didTapImage:(id)sender {
     [self getImage];
 }
 
-- (void) clearImage {
+- (void) clear{
+    self.captionText.text = @"";
     self.postImageView.image = [UIImage imageNamed:@"image_placeholder"];
+    [self dismissViewControllerAnimated:YES completion:^{
+        //something
+    }];
 }
 
 - (IBAction)didTapShare:(id)sender {
@@ -46,8 +50,7 @@
         NSLog(@"Starting Request");
         [Post postUserImage:self.postImageView.image withCaption:self.captionText.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self clearImage];
-                self.captionText.text = @"";
+                [self clear];
                 NSLog(@"Everything's cool");
             }
             else {

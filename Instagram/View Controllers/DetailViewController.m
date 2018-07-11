@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import <ParseUI/ParseUI.h>
+#import <DateTools/NSDate+DateTools.h>
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImage;
@@ -29,19 +30,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
-    self.postImage.file = self.post.image;
-    [self.postImage loadInBackground];
-    
-    self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", self.post.likeCount];
-    self.topUsernameLabel.text = self.post.author.username;
-    self.botUsernameLabel.text = self.post.author.username;
-    self.captionLabel.text = self.post.caption;
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)configureView {
+    
+    self.postImage.image = [UIImage imageNamed:@"image_placeholder"];
+    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
+    self.postImage.file = self.post.image;
+    [self.postImage loadInBackground];
+    
+    self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", self.post.likeCount];
+    self.likeButton.selected = self.post.liked;
+    self.topUsernameLabel.text = self.post.author.username;
+    self.botUsernameLabel.text = self.post.author.username;
+    self.captionLabel.text = self.post.caption;
+    self.createdAtLabel.text = [self.post makeCreatedAtString];
 }
 
 /*

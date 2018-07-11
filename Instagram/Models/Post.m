@@ -7,10 +7,11 @@
 //
 
 #import "Post.h"
+#import <DateTools/NSDate+DateTools.h>
 
 @implementation Post
 
-@dynamic postID, userID, author, caption, image, likeCount, commentCount;
+@dynamic postID, userID, author, caption, image, likeCount, liked, commentCount;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -22,6 +23,7 @@
     newPost.author = [PFUser currentUser];
     newPost.caption = caption;
     newPost.likeCount = @(0);
+    newPost.liked = NO;
     newPost.commentCount = @(0);
     
     [newPost saveInBackgroundWithBlock:completion];
@@ -37,6 +39,23 @@
         return nil;
     }
     return [PFFile fileWithName:@"image.png" data:imageData];
+}
+
+- (NSString *) makeCreatedAtString{
+    NSString *createdAtString = @"";
+    NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:self.createdAt];
+    if (secondsBetween <= 3600*12) {
+        createdAtString = self.createdAt.timeAgoSinceNow;
+    }
+    else {
+        // Configure output format
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterLongStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        // Convert Date to String
+        createdAtString = [formatter stringFromDate:self.createdAt];
+    }
+    return createdAtString;
 }
 
 @end
