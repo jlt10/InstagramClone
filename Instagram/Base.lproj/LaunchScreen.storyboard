@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgs-DG-WJ0">
-                                <rect key="frame" x="115" y="171.5" width="144" height="43"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-colourful-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6WY-eh-zG6">
                                 <rect key="frame" x="70" y="217" width="235" height="232"/>
                                 <constraints>
@@ -36,8 +30,6 @@
                         <constraints>
                             <constraint firstItem="6WY-eh-zG6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3Tb-Eg-6TZ"/>
                             <constraint firstItem="6WY-eh-zG6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Hxr-mF-haP"/>
-                            <constraint firstItem="6WY-eh-zG6" firstAttribute="top" secondItem="bgs-DG-WJ0" secondAttribute="bottom" constant="2.5" id="ZEg-RV-xcA"/>
-                            <constraint firstItem="bgs-DG-WJ0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="yCe-b4-8rx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "PhotoCell.h"
+#import "DetailViewController.h"
 
 @interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -84,14 +85,19 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"postDetails"]) {
+        DetailViewController *detailController = [segue destinationViewController];
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        detailController.post = post;
+    }
 }
-*/
 
 @end
