@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		025DC35F84B2AC1CC2DA279C /* libPods-InstagramTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF91D1A1701477744C45190A /* libPods-InstagramTests.a */; };
 		2E49C27ABB2A664384328CB6 /* libPods-InstagramUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A2660C7863E7A4DC38FC1 /* libPods-InstagramUITests.a */; };
+		337EB70B20F672010001435E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB70A20F672010001435E /* ProfileViewController.m */; };
+		337EB70E20F6AEA40001435E /* PhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB70D20F6AEA40001435E /* PhotoCollectionCell.m */; };
 		3394F42A20F415FA00D181E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394F42920F415FA00D181E2 /* AppDelegate.m */; };
 		3394F43020F415FA00D181E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3394F42E20F415FA00D181E2 /* Main.storyboard */; };
 		3394F43220F415FC00D181E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3394F43120F415FC00D181E2 /* Assets.xcassets */; };
@@ -46,6 +48,10 @@
 /* Begin PBXFileReference section */
 		02DC8E1669E37CAEE3AA1B26 /* libPods-Instagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Instagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A01399D1BC63BD89DEE639 /* Pods-InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramTests/Pods-InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
+		337EB70920F672010001435E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		337EB70A20F672010001435E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		337EB70C20F6AEA40001435E /* PhotoCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionCell.h; sourceTree = "<group>"; };
+		337EB70D20F6AEA40001435E /* PhotoCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionCell.m; sourceTree = "<group>"; };
 		3394F42520F415FA00D181E2 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3394F42820F415FA00D181E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3394F42920F415FA00D181E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 				3394F47120F57CDB00D181E2 /* DetailViewController.m */,
 				3394F4B720F5D4DF00D181E2 /* MainTabBarController.h */,
 				3394F4B820F5D4DF00D181E2 /* MainTabBarController.m */,
+				337EB70920F672010001435E /* ProfileViewController.h */,
+				337EB70A20F672010001435E /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -209,6 +217,8 @@
 			children = (
 				3394F46720F43ACA00D181E2 /* PhotoCell.h */,
 				3394F46820F43ACA00D181E2 /* PhotoCell.m */,
+				337EB70C20F6AEA40001435E /* PhotoCollectionCell.h */,
+				337EB70D20F6AEA40001435E /* PhotoCollectionCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,6 +457,8 @@
 				3394F46620F4369500D181E2 /* CameraViewController.m in Sources */,
 				3394F4B920F5D4DF00D181E2 /* MainTabBarController.m in Sources */,
 				3394F45C20F4212200D181E2 /* LoginViewController.m in Sources */,
+				337EB70E20F6AEA40001435E /* PhotoCollectionCell.m in Sources */,
+				337EB70B20F672010001435E /* ProfileViewController.m in Sources */,
 				3394F47220F57CDB00D181E2 /* DetailViewController.m in Sources */,
 				3394F43820F415FC00D181E2 /* main.m in Sources */,
 				3394F42A20F415FA00D181E2 /* AppDelegate.m in Sources */,

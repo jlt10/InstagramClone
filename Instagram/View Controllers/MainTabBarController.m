@@ -26,15 +26,14 @@
 }
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    if ([item.image isEqual:[UIImage imageNamed:@"insta_camera_btn"]]) {
-        [self performSegueWithIdentifier:@"composePost" sender:item];
-    }
+//    if ([item.image isEqual:[UIImage imageNamed:@"insta_camera_btn"]]) {
+//        NSLog(@"Hey print out this you coward");
+//    }
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    
-    NSLog(@"%@", NSStringFromClass([viewController class]));
     if ([viewController.restorationIdentifier isEqual:@"ComposeNavigationController"]) {
+        [self performSegueWithIdentifier:@"composePost" sender:nil];
         return NO;
     }
     return YES;
