@@ -76,4 +76,9 @@
     }];
 }
 
+-(void)didUpdatePost:(Post *)post {
+    self.post = post;
+    [self refreshView];
+}
+
 @end

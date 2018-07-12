@@ -37,9 +37,9 @@
     [self fetchPosts];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    [self.tableView reloadData];
-}
+//- (void) viewDidAppear:(BOOL)animated {
+//    [self.tableView reloadData];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -105,6 +105,8 @@
         DetailViewController *detailController = [segue destinationViewController];
         PhotoCell *tappedCell = sender;
         detailController.post = tappedCell.post;
+        detailController.delegate = tappedCell;
+        
     }
 }
 

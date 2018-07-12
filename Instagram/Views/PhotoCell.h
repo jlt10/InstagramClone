@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 #import <ParseUI/ParseUI.h>
+#import "DetailViewController.h"
 
-@interface PhotoCell : UITableViewCell
+@interface PhotoCell : UITableViewCell <DetailViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;

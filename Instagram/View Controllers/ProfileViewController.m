@@ -98,6 +98,7 @@
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
         Post *post = self.userPosts[indexPath.row];
         detailController.post = post;
+        detailController.delegate = tappedCell;
     }
 }
 

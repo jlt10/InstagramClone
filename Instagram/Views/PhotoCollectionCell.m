@@ -17,4 +17,7 @@
     [self.postImage loadInBackground];
 }
 
+-(void)didUpdatePost:(Post *)post {
+    self.post = post;
+}
 @end

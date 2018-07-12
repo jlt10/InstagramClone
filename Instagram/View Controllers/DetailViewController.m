@@ -74,6 +74,7 @@
             [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     self.post = post;
+                    [self.delegate didUpdatePost:self.post];
                     [self refreshView];
                 }
                 

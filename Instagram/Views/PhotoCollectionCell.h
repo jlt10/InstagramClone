@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
 #import "Post.h"
+#import "DetailViewController.h"
 
-@interface PhotoCollectionCell : UICollectionViewCell
+@interface PhotoCollectionCell : UICollectionViewCell <DetailViewControllerDelegate>
 @property (strong, nonatomic) Post *post;
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
 

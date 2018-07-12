@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 
+@protocol DetailViewControllerDelegate
+
+- (void) didUpdatePost:(Post *)post;
+@end
+
+
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) id<DetailViewControllerDelegate> delegate;
 
 @end
