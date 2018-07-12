@@ -37,6 +37,10 @@
     [self fetchPosts];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -99,10 +103,8 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"postDetails"]) {
         DetailViewController *detailController = [segue destinationViewController];
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.posts[indexPath.row];
-        detailController.post = post;
+        PhotoCell *tappedCell = sender;
+        detailController.post = tappedCell.post;
     }
 }
 

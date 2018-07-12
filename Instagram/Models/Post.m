@@ -11,7 +11,7 @@
 
 @implementation Post
 
-@dynamic postID, userID, author, caption, image, likeCount, liked, commentCount;
+@dynamic postID, userID, author, caption, image, likeCount, likedBy, commentCount;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -23,7 +23,7 @@
     newPost.author = [PFUser currentUser];
     newPost.caption = caption;
     newPost.likeCount = @(0);
-    newPost.liked = NO;
+    newPost.likedBy = [[NSMutableArray alloc] init];
     newPost.commentCount = @(0);
     
     [newPost saveInBackgroundWithBlock:completion];
@@ -56,6 +56,10 @@
         createdAtString = [formatter stringFromDate:self.createdAt];
     }
     return createdAtString;
+}
+
+- (BOOL) likedByCurrentUser {
+    return [self.likedBy containsObject:PFUser.currentUser.objectId];
 }
 
 @end

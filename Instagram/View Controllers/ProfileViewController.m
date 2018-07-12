@@ -68,16 +68,15 @@
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
     [query whereKey:@"author" equalTo:self.user];
-    query.limit = 20;
     
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            NSLog(@"Got POsts");
             [self.userPosts removeAllObjects];
             for (Post *post in posts) {
                 [self.userPosts addObject:post];
             }
+            self.postCountLabel.text = [NSString stringWithFormat:@"%lu", self.userPosts.count];
             [self.collectionView reloadData];
         }
         else {
