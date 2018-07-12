@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionText;
+@property (nonatomic) BOOL uploading;
 
 @end
 
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];    // Do any additional setup after loading the view.
+    self.uploading = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,8 +48,9 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
-    if (![self.postImageView.image isEqual:[UIImage imageNamed:@"image_placeholder"]]) {
+    if (![self.postImageView.image isEqual:[UIImage imageNamed:@"image_placeholder"]] && !self.uploading) {
         NSLog(@"Starting Request");
+        self.uploading = YES;
         [Post postUserImage:self.postImageView.image withCaption:self.captionText.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 [self clear];
@@ -56,10 +59,11 @@
             else {
                 NSLog(@"Failed with error: %@", error.localizedDescription);
             }
+            self.uploading = NO;
         }];
     }
     else {
-        NSLog(@"No image dude");
+        NSLog(@"No image dude or uploading right now");
     }
 }
 

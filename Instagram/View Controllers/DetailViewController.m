@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <ParseUI/ParseUI.h>
 #import <DateTools/NSDate+DateTools.h>
+#import "ProfileViewController.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImage;
@@ -93,15 +94,21 @@
 - (IBAction)didTapLike:(id)sender {
     [self toggleFavorite];
 }
+- (IBAction)didTapUserHeader:(id)sender {
+    [self performSegueWithIdentifier:@"userProfile" sender:self.post.author];
+}
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"userProfile"]) {
+        ProfileViewController *profileController = [segue destinationViewController];
+        PFUser *user = sender;
+        profileController.user = user;
+    }
 }
-*/
 
 @end

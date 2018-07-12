@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUserProfile)];
+    [self.userHeaderView addGestureRecognizer:singleFingerTap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -27,9 +29,12 @@
     self.postImage.file = post.image;
     [self.postImage loadInBackground];
     
+    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
+    
     self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", post.likeCount];
     self.likeButton.selected = [post likedByCurrentUser];
-    self.usernameLabel.text = post.author.username;
+    self.topUsernameLabel.text = post.author.username;
+    self.botUsernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     self.createdAtLabel.text = [[post makeCreatedAtString] uppercaseString];
 }
@@ -79,6 +84,10 @@
 -(void)didUpdatePost:(Post *)post {
     self.post = post;
     [self refreshView];
+}
+
+- (void) didTapUserProfile {
+    [self.delegate showProfileScreen:self.post.author];
 }
 
 @end

@@ -13,10 +13,11 @@
 #import "PhotoCell.h"
 #import "DetailViewController.h"
 
-@interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PhotoCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) UIRefreshControl *infiniteRefreshControl;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic) BOOL loadedAllPosts;
 
@@ -86,6 +87,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell" forIndexPath:indexPath];
     cell.post = self.posts[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -99,11 +101,12 @@
     if(!self.loadedAllPosts && !self.isMoreDataLoading){
         // Calculate the position of one screen length before the bottom of the results
         int scrollViewContentHeight = self.tableView.contentSize.height;
-        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height - 50;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
         
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
             self.isMoreDataLoading = YES;
+            
             [self fetchMorePosts:(int)[self.tableView numberOfRowsInSection:0]];
         }
     }
@@ -135,6 +138,11 @@
     
 }
 
+
+- (void) showProfileScreen:(PFUser *)user {
+    [self performSegueWithIdentifier:@"userProfile" sender:user];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -148,6 +156,12 @@
         detailController.delegate = tappedCell;
         
     }
+    else if ([segue.identifier isEqualToString:@"userProfile"]) {
+            ProfileViewController *profileController = [segue destinationViewController];
+            PFUser *user = sender;
+            profileController.user = user;
+            
+        }
 }
 
 @end

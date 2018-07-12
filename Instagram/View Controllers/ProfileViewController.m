@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
 
 @property (strong, nonatomic) NSMutableArray *userPosts;
 
@@ -29,33 +30,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.user = PFUser.currentUser;
-    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
+    self.editProfileButton.hidden = YES;
+    if (!self.user){
+        self.user = PFUser.currentUser;
+    }
     
-    self.usernameLabel.text = self.user.username;
+    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
     self.userPosts = [[NSMutableArray alloc] init];
-    [self fetchUserPosts];
-    
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    CGFloat spacing = 2;
-    layout.minimumInteritemSpacing = spacing;
-    layout.minimumLineSpacing = spacing;
-    
-    CGFloat postsPerRow = 3;
-    CGFloat itemDim = (self.collectionView.frame.size.width - (postsPerRow-1)*layout.minimumInteritemSpacing - 2*2)/postsPerRow;
-    layout.itemSize = CGSizeMake(itemDim, itemDim);
     
     CGFloat maxHeight = self.collectionView.frame.origin.y + self.collectionView.contentSize.height + 10;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, maxHeight);
 //    self.collectionView.contentSize = CGSizeMake(self.collectionView.contentSize.width, self.collectionView.contentSize.height);
+    
+    [self.editProfileButton.layer setBorderWidth:1];
+    [self.editProfileButton.layer setBorderColor:[[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] CGColor]];
+    
+    [self refreshView];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self fetchUserPosts];
+    [self refreshView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +84,16 @@
     
 }
 
+- (void) refreshView {
+    if ([self.user.objectId isEqual:PFUser.currentUser.objectId]){
+        self.editProfileButton.hidden = NO;
+    }
+    
+    self.usernameLabel.text = self.user.username;
+    [self fetchUserPosts];
+    
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -111,6 +119,23 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.userPosts.count;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    CGFloat spacing = 2;
+    layout.minimumInteritemSpacing = spacing;
+    layout.minimumLineSpacing = spacing;
+    
+    CGFloat postsPerRow = 3;
+    CGFloat itemDim = (self.collectionView.frame.size.width - (postsPerRow-1)*layout.minimumInteritemSpacing - layout.sectionInset.left - layout.sectionInset.right)/postsPerRow;
+    return CGSizeMake(itemDim, itemDim);
+}
+
+- (IBAction)didTapProfileEdit:(id)sender {
+    NSLog(@"Edit Profile Button working");
 }
 
 @end
