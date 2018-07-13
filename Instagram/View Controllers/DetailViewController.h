@@ -12,6 +12,7 @@
 @protocol DetailViewControllerDelegate
 
 - (void) didUpdatePost:(Post *)post;
+
 @end
 
 

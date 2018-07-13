@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "User.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +29,7 @@
     
     [Parse initializeWithConfiguration:config];
     
-    if (PFUser.currentUser) {
+    if (User.currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeFeedTabBarController"];
     }

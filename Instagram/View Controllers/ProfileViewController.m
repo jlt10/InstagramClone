@@ -9,9 +9,10 @@
 #import "ProfileViewController.h"
 #import "PhotoCollectionCell.h"
 #import "DetailViewController.h"
+#import "ProfileEditorViewController.h"
 
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet UIImageView *profilePicImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profilePicImage;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postCountLabel;
@@ -32,10 +33,11 @@
     // Do any additional setup after loading the view.
     self.editProfileButton.hidden = YES;
     if (!self.user){
-        self.user = PFUser.currentUser;
+        self.user = (User *)[PFUser currentUser];
     }
     
     self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
+    
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -85,13 +87,26 @@
 }
 
 - (void) refreshView {
-    if ([self.user.objectId isEqual:PFUser.currentUser.objectId]){
+    self.profilePicImage.file = self.user.profilePicImage;
+    [self.profilePicImage loadInBackground];
+    if (self.user.bio) {
+        self.descriptionLabel.text = self.user.bio;
+    }
+    else {
+        self.descriptionLabel.text = @"";
+    }
+    
+    if ([self.user.objectId isEqual:User.currentUser.objectId]){
         self.editProfileButton.hidden = NO;
     }
     
     self.usernameLabel.text = self.user.username;
     [self fetchUserPosts];
     
+}
+
+- (void) didUpdateUser {
+    [self refreshView];
 }
 
 #pragma mark - Navigation
@@ -132,10 +147,6 @@
     CGFloat postsPerRow = 3;
     CGFloat itemDim = (self.collectionView.frame.size.width - (postsPerRow-1)*layout.minimumInteritemSpacing - layout.sectionInset.left - layout.sectionInset.right)/postsPerRow;
     return CGSizeMake(itemDim, itemDim);
-}
-
-- (IBAction)didTapProfileEdit:(id)sender {
-    NSLog(@"Edit Profile Button working");
 }
 
 @end

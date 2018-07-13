@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "User.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -27,54 +28,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (IBAction)didTapSignUp:(id)sender {
-    [self registerUser];
-}
-
 - (IBAction)didTapLogin:(id)sender {
     [self loginUser];
-}
-
-- (void)registerUser {
-    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
-        // we crete a new alert
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Empty Field" message:@"Please make sure both username and password fields are completed" preferredStyle:UIAlertControllerStyleAlert];
-    
-        // create an action(button)N for that alert
-        //handler is what happens after press action
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self dismissViewControllerAnimated:YES completion:^{
-            // more extra stuff just want to dismiss
-            }];
-        }];
-    
-        //how to actually apply it
-        [alert addAction:okAction];
-        
-        //want to present after programming error
-        [self presentViewController:alert animated:YES completion:^{
-            // for when the controler is finished
-        }];
-    }
-    else {
-        // initialize a user object
-        PFUser *newUser = [PFUser user];
-        
-        // set user properties
-        newUser.username = self.usernameField.text;
-        newUser.password = self.passwordField.text;
-        
-        // call sign up function on the object
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-            } else {
-                NSLog(@"User registered successfully");
-                [self segueToFeed];
-            }
-        }];
-    }
 }
 
 
@@ -82,7 +37,7 @@
     NSString  *username =  self.usernameField.text;
     NSString *password = self.passwordField.text;
     
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+    [User logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[NSString stringWithFormat:@"There was an error logging in: %@", error.localizedDescription] preferredStyle:UIAlertControllerStyleAlert];

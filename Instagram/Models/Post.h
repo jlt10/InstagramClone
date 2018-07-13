@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "User.h"
 
 @interface Post : PFObject<PFSubclassing>
 
 @property (nonatomic, strong, nullable) NSString *postID;
 @property (nonatomic, strong, nullable) NSString *userID;
-@property (nonatomic, strong, nullable) PFUser *author;
+@property (nonatomic, strong, nullable) User *author;
 
 @property (nonatomic, strong, nullable) NSString *caption;
 @property (nonatomic, strong, nullable) PFFile *image;

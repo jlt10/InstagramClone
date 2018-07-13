@@ -14,7 +14,7 @@
 
 @protocol PhotoCellDelegate
 
--(void) showProfileScreen:(PFUser *)user;
+-(void) showProfileScreen:(User *)user;
 
 @end
 

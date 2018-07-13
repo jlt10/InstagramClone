@@ -20,7 +20,7 @@
 + (void) postUserImage:(UIImage *)image withCaption:(NSString *)caption withCompletion:(PFBooleanResultBlock)completion {
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
-    newPost.author = [PFUser currentUser];
+    newPost.author = [User currentUser];
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.likedBy = [[NSMutableArray alloc] init];
@@ -44,7 +44,7 @@
 - (NSString *) makeCreatedAtString{
     NSString *createdAtString = @"";
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:self.createdAt];
-    if (secondsBetween <= 3600*12) {
+    if (secondsBetween <= 3600*24*2) {
         createdAtString = self.createdAt.timeAgoSinceNow;
     }
     else {
@@ -59,7 +59,7 @@
 }
 
 - (BOOL) likedByCurrentUser {
-    return [self.likedBy containsObject:PFUser.currentUser.objectId];
+    return [self.likedBy containsObject:User.currentUser.objectId];
 }
 
 @end

@@ -12,7 +12,7 @@
 #import "ProfileViewController.h"
 
 @interface DetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *profilePicImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profilePicImage;
 @property (weak, nonatomic) IBOutlet UILabel *botUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topUsernameLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
@@ -40,14 +40,18 @@
 }
 
 - (void)configureView {
+    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
+    self.profilePicImage.image = [UIImage imageNamed:@"profile_tab"];
+    if (self.post.author.profilePicImage) {
+        self.profilePicImage.file = self.post.author.profilePicImage;
+        [self.profilePicImage loadInBackground];
+    }
     
     self.postImage.image = [UIImage imageNamed:@"image_placeholder"];
-    self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.height/2;
     self.postImage.file = self.post.image;
     [self.postImage loadInBackground];
     
-    self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", self.post.likeCount];
-    self.likeButton.selected = [self.post likedByCurrentUser];
+    [self refreshView];
     self.topUsernameLabel.text = self.post.author.username;
     self.botUsernameLabel.text = self.post.author.username;
     self.captionLabel.text = self.post.caption;
@@ -64,12 +68,12 @@
             Post *post = (Post *)object;
             if ([post likedByCurrentUser]) {
                 [post incrementKey:@"likeCount" byAmount:@(-1)];
-                [post removeObject:PFUser.currentUser.objectId forKey:@"likedBy"];
+                [post removeObject:User.currentUser.objectId forKey:@"likedBy"];
                 //                NSLog(@"Unliking Likes: %@ Faved: %d", post.likeCount, [post likedByCurrentUser]);
             }
             else {
                 [post incrementKey:@"likeCount" byAmount:@(1)];
-                [post addObject:PFUser.currentUser.objectId forKey:@"likedBy"];
+                [post addObject:User.currentUser.objectId forKey:@"likedBy"];
                 //                NSLog(@"Liking Likes: %@ Faved: %d", post.likeCount, [post likedByCurrentUser]);
             }
             [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -89,7 +93,10 @@
 
 - (void) refreshView {
     self.likeButton.selected = [self.post likedByCurrentUser];
-    self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", self.post.likeCount];
+    
+    NSString *likesText = @"%@ Likes";
+    if ([self.post.likeCount isEqualToNumber:@1]) likesText = @"%@ Like";
+    self.likesLabel.text = [NSString stringWithFormat:likesText, self.post.likeCount];
 }
 - (IBAction)didTapLike:(id)sender {
     [self toggleFavorite];
@@ -106,7 +113,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"userProfile"]) {
         ProfileViewController *profileController = [segue destinationViewController];
-        PFUser *user = sender;
+        User *user = sender;
         profileController.user = user;
     }
 }
