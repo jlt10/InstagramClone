@@ -51,9 +51,9 @@ Here's a walkthrough of implemented user stories:
 
 All Demos at Imgur Post: https://imgur.com/Y5B90oj
 
-<img src='https://i.imgur.com/Upfv7ib.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='https://i.imgur.com/uJs0eHW.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='https://i.imgur.com/R0nw8N2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/eAZNyXG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/IJUEfKr.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/Y5B90oj.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Credits
 
