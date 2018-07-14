@@ -14,6 +14,7 @@
 		337EB75520F802EE0001435E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB75420F802EE0001435E /* User.m */; };
 		337EB75820F80AF80001435E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB75720F80AF80001435E /* SignUpViewController.m */; };
 		337EB75B20F821B30001435E /* ProfileEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB75A20F821B30001435E /* ProfileEditorViewController.m */; };
+		337EB75E20F913920001435E /* CustomCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EB75D20F913920001435E /* CustomCameraViewController.m */; };
 		3394F42A20F415FA00D181E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394F42920F415FA00D181E2 /* AppDelegate.m */; };
 		3394F43020F415FA00D181E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3394F42E20F415FA00D181E2 /* Main.storyboard */; };
 		3394F43220F415FC00D181E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3394F43120F415FC00D181E2 /* Assets.xcassets */; };
@@ -61,6 +62,8 @@
 		337EB75720F80AF80001435E /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		337EB75920F821B30001435E /* ProfileEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileEditorViewController.h; sourceTree = "<group>"; };
 		337EB75A20F821B30001435E /* ProfileEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileEditorViewController.m; sourceTree = "<group>"; };
+		337EB75C20F913920001435E /* CustomCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCameraViewController.h; sourceTree = "<group>"; };
+		337EB75D20F913920001435E /* CustomCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCameraViewController.m; sourceTree = "<group>"; };
 		3394F42520F415FA00D181E2 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3394F42820F415FA00D181E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3394F42920F415FA00D181E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				337EB70A20F672010001435E /* ProfileViewController.m */,
 				337EB75920F821B30001435E /* ProfileEditorViewController.h */,
 				337EB75A20F821B30001435E /* ProfileEditorViewController.m */,
+				337EB75C20F913920001435E /* CustomCameraViewController.h */,
+				337EB75D20F913920001435E /* CustomCameraViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				3394F4B920F5D4DF00D181E2 /* MainTabBarController.m in Sources */,
 				3394F45C20F4212200D181E2 /* LoginViewController.m in Sources */,
 				337EB70E20F6AEA40001435E /* PhotoCollectionCell.m in Sources */,
+				337EB75E20F913920001435E /* CustomCameraViewController.m in Sources */,
 				337EB70B20F672010001435E /* ProfileViewController.m in Sources */,
 				3394F47220F57CDB00D181E2 /* DetailViewController.m in Sources */,
 				3394F43820F415FC00D181E2 /* main.m in Sources */,

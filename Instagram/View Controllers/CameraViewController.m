@@ -10,11 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "CustomCameraViewController.h"
 
-@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, CustomCameraViewControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
-@property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionText;
 @property (nonatomic) BOOL uploading;
 @property (nonatomic) BOOL addedCaption;
@@ -30,6 +30,8 @@
     self.imagePickerVC = [UIImagePickerController new];
     self.imagePickerVC.delegate = self;
     self.imagePickerVC.allowsEditing = YES;
+    
+    if (self.startImage) self.postImageView.image = self.startImage;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +44,8 @@
 }
 
 - (IBAction)didTapImage:(id)sender {
-    [self getImageFromCamera];
+//    [self getImageFromCamera];
+    [self performSegueWithIdentifier:@"customCamera" sender:nil];
 }
 
 - (IBAction)didTapSelectFromLibrary:(id)sender {
@@ -140,14 +143,23 @@
     }
 }
 
-/*
+-(void)didTakePhoto:(UIImage *)image {
+    self.postImageView.image = image;
+    NSLog(@"Called");
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"customCamera"]) {
+        CustomCameraViewController *customCameraVC = [segue destinationViewController];
+        customCameraVC.delegate = self;
+    }
 }
-*/
+
 
 @end

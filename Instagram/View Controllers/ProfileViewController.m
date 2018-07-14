@@ -87,8 +87,12 @@
 }
 
 - (void) refreshView {
-    self.profilePicImage.file = self.user.profilePicImage;
-    [self.profilePicImage loadInBackground];
+    if (self.user.profilePicImage) {
+        self.profilePicImage.file = self.user.profilePicImage;
+        [self.profilePicImage loadInBackground];
+    }
+    else self.profilePicImage.image = [UIImage imageNamed:@"profile_tab"];
+    
     if (self.user.bio) {
         self.descriptionLabel.text = self.user.bio;
     }

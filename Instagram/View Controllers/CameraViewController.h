@@ -10,4 +10,7 @@
 
 @interface CameraViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *postImageView;
+@property (strong, nonatomic) UIImage *startImage;
+
 @end
